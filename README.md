@@ -10,4 +10,4 @@ Install the Tampermonkey extension for your browser.
 
 [Tampermonkey for Safari](https://tampermonkey.net/?browser=safari)
 
-Then **[click here to install the poebulktradecalibrator user script](https://raw.githubusercontent.com/brandnola/poebulktradecalibrator/master/PoeBulkTradeCalibrator.js)**.
+Then **[click here to install the poebulktradecalibrator user script](https://raw.githubusercontent.com/brandnola/poebulktradecalibrator/master/PoeBulkTradeCalibrator.user.js)**.
