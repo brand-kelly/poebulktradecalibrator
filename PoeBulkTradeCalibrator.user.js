@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name        PoE Bulk Trade Slider Bar Calibrator
 // @namespace   Violentmonkey Scripts
-// @match       https://www.pathofexile.com/trade/exchange/Ultimatum/*
+// @match       https://www.pathofexile.com/trade/exchange/*/*
 // @grant       none
 // @version     1.0
 // @author      brandnola
