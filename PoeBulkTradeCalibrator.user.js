@@ -3,7 +3,7 @@
 // @namespace   Violentmonkey Scripts
 // @match       https://www.pathofexile.com/trade/exchange/*/*
 // @grant       none
-// @version     2.0
+// @version     3.0
 // @author      brandnola
 // @description Forces PoE's bulk exchange slider bar to be at most the number of items a seller has in stock
 // ==/UserScript==
@@ -18,16 +18,22 @@ const callback = function (mutationsList, observer) {
             return;
         }
 
+        const characterNameArray = mutation.target.querySelector('textarea').childNodes[0].data.match(/[^@ ]+/);
+        if (characterNameArray) {
+            const characterName = characterNameArray[0];
+            let accountName = (mutation.target.querySelector('.right .profile-link').children[0].innerText =
+                characterName);
+        }
+
         const childPriceBlockLength = mutation.target.querySelector('.price-block')?.children.length;
-        const whatYouGet = mutation.target.querySelector('.price-block')?.children[childPriceBlockLength - 1]
-            .textContent;
+        const whatYouGet =
+            mutation.target.querySelector('.price-block')?.children[childPriceBlockLength - 1].textContent;
         const sellerStock = mutation.target.querySelector('.stock')?.children[0].textContent;
 
         const whatYouGetInteger = parseInt(whatYouGet);
         const sellerStockInteger = parseInt(sellerStock);
 
         const sliderMax = Math.floor(sellerStockInteger / whatYouGetInteger);
-
         if (sliderMax) {
             mutation.target.querySelector('input[type="range"]')?.setAttribute('max', String(sliderMax));
         }
@@ -38,9 +44,8 @@ const callback = function (mutationsList, observer) {
             btn.style.color = '#e9cf9f';
             btn.style.fontFamily = 'Verdana, Arial, Helvetica, sans-serif';
             btn.style.marginLeft = '.75rem';
-            btn.innerHTML = 'Max';
-            
             const inputElement = mutation.target.querySelector('input[type="range"]');
+            btn.innerHTML = 'Max';
             mutation.target.querySelector('.slider-right').appendChild(btn);
             btn.onclick = () => {
                 inputElement.value = inputElement.max;
@@ -53,5 +58,3 @@ const callback = function (mutationsList, observer) {
 const observer = new MutationObserver(callback);
 
 observer.observe(targetNode, config);
-
-// observer.disconnect();  DO NOT need to disconnect while we are on bulk item trade page
