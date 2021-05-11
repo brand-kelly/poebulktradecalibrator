@@ -51,6 +51,10 @@ const callback = function (mutationsList, observer) {
                 inputElement.value = inputElement.max;
                 inputElement.dispatchEvent(new Event('input', { bubbles: true, cancelable: true }));
             };
+
+            if (sliderMax === 1) {
+                btn.disabled = true;
+            }
         }
     }
 };
@@ -58,3 +62,5 @@ const callback = function (mutationsList, observer) {
 const observer = new MutationObserver(callback);
 
 observer.observe(targetNode, config);
+
+// observer.disconnect();  DO NOT need to disconnect while we are on bulk item trade page
